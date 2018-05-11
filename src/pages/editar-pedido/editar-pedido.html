@@ -1,0 +1,53 @@
+<ion-header>
+ 
+  <ion-navbar>
+    <ion-title>{{pedido?.nombreVecino}}</ion-title>
+  </ion-navbar>
+ 
+</ion-header>
+ 
+<ion-content padding>
+ 
+  <ion-item>
+    <ion-label>Nombre del Vecino</ion-label>
+    <ion-input [(ngModel)]="pedido.nombreVecino"></ion-input>
+  </ion-item>
+ 
+  <ion-item>
+    <ion-label>Direccion</ion-label>
+    <ion-textarea [(ngModel)]="pedido.direccion"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Telefono</ion-label>
+    <ion-textarea [(ngModel)]="pedido.telefono"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Comentarios</ion-label>
+    <ion-textarea [(ngModel)]="pedido.referencias"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Zona</ion-label>
+    <ion-select [(ngModel)]="pedido.zona">
+      <ion-option value="A">A</ion-option>
+      <ion-option value="B">B</ion-option>
+      <ion-option value="C">C</ion-option>
+      <ion-option value="D">D</ion-option>
+      <ion-option value="E">E</ion-option>
+      <ion-option value="F">F</ion-option>
+      <ion-option value="G">G</ion-option>
+      <ion-option value="H">H</ion-option>
+      <ion-option value="I">I</ion-option>
+      <ion-option value="Adelante">Adelante</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <button (click)="getCurrentPosition()" ion-button block clear small>
+      <div>Generar Posicion y Guardar</div>
+    </button>
+ 
+  <button ion-button block clear (click)="actualizarPedido(pedido)">Guardar</button>
+  <button ion-button block clear (click)="removerPedido(pedido)">Borrar</button>
+</ion-content>
