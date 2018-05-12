@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>Zona F</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+
+
+
+<ion-content has-header="true" has-tabs="true" padding>
+  <ion-card *ngFor="let pedido of pedidosListA | async">
+
+    <ion-item>
+      <h2>Nombre del Vecino: {{pedido.nombreVecino}}</h2>
+      <p>Direccion: {{pedido.direccion}}</p>
+    </ion-item>
+    <div *ngIf="pedido.latitud != 0">
+      <img src="http://maps.googleapis.com/maps/api/staticmap?center={{pedido.latitud}},{{pedido.longitud}}&zoom=17&size=400x400&markers=color:blue%7Clabel:C%7C{{pedido.latitud}},{{pedido.longitud}}&markers=size:mid&key=AIzaSyC1uBdgcDXvykhhe_dt3mJ2OkYN-1TBUPA">
+    </div>
+    <ion-card-content>
+      <div>Comentarios: </div>
+      <p>{{pedido.referencia}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button detail-push navPush="EditarPedidoPage" [navParams]="{pedido:pedido}" ion-button icon-left clear small>
+          Editar Datos
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <div *ngIf="!pedido.fechaUltimaVisita">
+          Fecha Ultima Visita: No visitada.
+        </div>
+        <div *ngIf="pedido.fechaUltimaVisita">
+          Fecha Ultima Visita: {{pedido.fechaUltimaVisita | date: 'dd/MM/yyyy'}}
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+  <ion-content>
