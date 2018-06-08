@@ -21,7 +21,6 @@ declare var google;
 export class AgregarPedidoPage {
   
   map: any;
-
   mLat: any;
   mLng: any;
 
@@ -47,17 +46,19 @@ export class AgregarPedidoPage {
  
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgregarPedidoPage');
+    AgregarPedidoPage.prototype.mLat = 0;
+      AgregarPedidoPage.prototype.mLng = 0;
     this.getPosition();
   }
  
   addPedido(pedido: Pedido) {
-    pedido.latitud = this.mLat;
-    pedido.longitud = this.mLng;
-    console.log("Lat: " + this.mLat + "\nLong: " + this.mLng); 
 
-   /* this.pedidosService.addPedido(pedido).then(ref => {
+    pedido.latitud = AgregarPedidoPage.prototype.mLat;
+    pedido.longitud = AgregarPedidoPage.prototype.mLng;
+    
+   this.pedidosService.addPedido(pedido).then(ref => {
       this.navCtrl.setRoot(HomePage);
-    })*/  
+    })
   }
 
   getPosition():any{
@@ -95,19 +96,12 @@ export class AgregarPedidoPage {
       map: this.map,
     });
 
-    this.map.addListener('click', function(event, pedido:Pedido){
-      console.log("Lat: " + this.mLat + "\nLong: " + this.mLng); 
+    this.map.addListener('click', function(event){
       this.setCenter(event.latLng);
       marker.setPosition(event.latLng);
-      this.mLat = event.latLng.lat();
-      this.mLng = event.latLng.lng();
+      AgregarPedidoPage.prototype.mLat = event.latLng.lat();
+      AgregarPedidoPage.prototype.mLng = event.latLng.lng();
     });
-
-
-
-    
-
-    
   }
 
 }
